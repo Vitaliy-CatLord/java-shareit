@@ -9,7 +9,6 @@ import lombok.experimental.FieldDefaults;
  * TODO Sprint add-controllers.
  */
 @Data
-@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class User {
     long id;

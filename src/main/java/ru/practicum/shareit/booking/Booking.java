@@ -6,7 +6,7 @@ import lombok.experimental.FieldDefaults;
 import ru.practicum.shareit.item.Item;
 import ru.practicum.shareit.user.User;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  * TODO Sprint add-bookings.
@@ -15,8 +15,8 @@ import java.sql.Timestamp;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Booking {
     long id;
-    Timestamp start;
-    Timestamp end;
+    LocalDateTime start;
+    LocalDateTime end;
     Item item;
     User booker;
     BookingStatus status;

@@ -9,6 +9,7 @@ import ru.practicum.shareit.item.Item;
 import ru.practicum.shareit.user.User;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  * TODO Sprint add-bookings.
@@ -17,8 +18,8 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class BookingDto {
-    Timestamp start;
-    Timestamp end;
+    LocalDateTime start;
+    LocalDateTime end;
     Item item;
     User booker;
     BookingStatus status;
