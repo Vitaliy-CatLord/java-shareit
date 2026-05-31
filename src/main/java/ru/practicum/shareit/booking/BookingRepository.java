@@ -1,7 +1,6 @@
 package ru.practicum.shareit.booking;
 
 import org.springframework.stereotype.Repository;
-import ru.practicum.shareit.user.User;
 
 import java.util.HashMap;
 import java.util.List;
