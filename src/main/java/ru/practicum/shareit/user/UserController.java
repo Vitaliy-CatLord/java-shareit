@@ -1,6 +1,7 @@
 package ru.practicum.shareit.user;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.user.dto.UserDto;
@@ -13,30 +14,31 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping(path = "/users")
+@RequiredArgsConstructor
 public class UserController {
-    UserService userService;
+    private final UserService userService;
 
     @PostMapping
-    public UserDto postUser(@Valid @RequestBody UserDto newUser) {
+    public User postUser(@Valid @RequestBody UserDto newUser) {
         log.info("Выполнение запроса на создание пользователя {}", newUser);
         return userService.createUser(newUser);
     }
 
     @GetMapping
-    public List<UserDto> getAllUsers() {
+    public List<User> getAllUsers() {
         log.info("Выполнение запроса на получение всех пользователей");
         return userService.getAll();
     }
 
     @GetMapping("/{id}")
-    public UserDto getUserById(@PathVariable Long id) {
+    public User getUserById(@PathVariable Long id) {
         log.info("Выполнение запроса на получение пользователя с ID {}", id);
         return userService.getUserById(id);
     }
 
-    @PutMapping("/{id}")
-    public UserDto putUser(@PathVariable Long id, @Valid @RequestBody UserDto updateUser) {
-        log.info("Выполнение запроса на изменение пользователя с ID {}", updateUser);
+    @PatchMapping("/{id}")
+    public User putUser(@PathVariable Long id, @Valid @RequestBody UserDto updateUser) {
+        log.info("Выполнение запроса на изменение пользователя {} с ID {}", updateUser, id);
         return userService.updateUser(id, updateUser);
     }
 

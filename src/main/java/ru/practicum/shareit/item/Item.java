@@ -12,7 +12,7 @@ public class Item {
     long id;
     String name;
     String description;
-    boolean available;
+    Boolean available;
     User owner;
     ItemRequest request;
 }

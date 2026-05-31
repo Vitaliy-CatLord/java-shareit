@@ -1,7 +1,6 @@
 package ru.practicum.shareit.item;
 
 import org.springframework.stereotype.Repository;
-import ru.practicum.shareit.user.User;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,8 +31,19 @@ public class ItemRepository {
                 .toList();
     }
 
-    public void update(long id, Item item) {
-        storage.put(id, item);
+    public Item updateItem(long id, Item item) {
+        Item oldItem = findById(id);
+        if (item.getName() != null) {
+            oldItem.setName(item.getName());
+        }
+        if (item.getDescription() != null) {
+            oldItem.setDescription(item.getDescription());
+        }
+        if (item.getAvailable() != null) {
+            oldItem.setAvailable(item.getAvailable());
+        }
+        storage.put(id, oldItem);
+        return oldItem;
     }
 
     public void deleteById(long itemId) {

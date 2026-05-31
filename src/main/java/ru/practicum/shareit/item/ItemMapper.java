@@ -7,7 +7,7 @@ public class ItemMapper {
         return new ItemDto(
                 item.getName(),
                 item.getDescription(),
-                item.isAvailable()
+                item.getAvailable()
         );
     }
 
@@ -15,7 +15,7 @@ public class ItemMapper {
         Item item = new Item();
         item.setName(dto.getName());
         item.setDescription(dto.getDescription());
-        item.setAvailable(dto.isAvailable());
+        item.setAvailable(dto.getAvailable());
         return item;
     }
 }

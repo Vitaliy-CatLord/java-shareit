@@ -5,6 +5,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ru.practicum.shareit.Exceptions.ConflictExeption;
+import ru.practicum.shareit.Exceptions.DuplicatedDataException;
+import ru.practicum.shareit.Exceptions.ValidationException;
 import ru.practicum.shareit.user.dto.UserDto;
 
 import java.util.List;
@@ -16,26 +19,34 @@ import java.util.List;
 public class UserService {
     UserRepository userRepository;
 
-    public UserDto createUser (UserDto dto) {
-        User user = userRepository.save(UserMapper.toUser(dto));
-        return UserMapper.toUserDto(user);
+    public User createUser(UserDto dto) {
+        if (dto.getName().isEmpty() || dto.getName().isBlank()) {
+            throw new ValidationException("Имя нового пользователя не может быть пустым");
+        }
+        if (dto.getEmail().isEmpty() || dto.getEmail().isBlank()) {
+            throw new ValidationException("Имейл нового пользователя не может быть пустым");
+        }
+        if (userRepository.findByEmail(dto.getEmail()).isPresent()) {
+            throw new DuplicatedDataException("Пользователь с этим имейлом уже существует");
+        }
+        return userRepository.save(UserMapper.toUser(dto));
     }
 
-    public List<UserDto> getAll () {
+    public List<User> getAll() {
         return userRepository.findAll().stream()
-                .map(UserMapper::toUserDto)
                 .toList();
     }
 
-    public UserDto getUserById(long userId) {
-        return UserMapper.toUserDto(userRepository.findById(userId));
+    public User getUserById(long userId) {
+        return userRepository.findById(userId);
     }
 
-    public UserDto updateUser(long userId, UserDto dto) {
+    public User updateUser(long userId, UserDto dto) {
         User user = UserMapper.toUser(dto);
-        userRepository.update(userId, user);
-        return dto;
-
+        if (userRepository.findByEmail(dto.getEmail()).isPresent()) {
+            throw new ConflictExeption("Нельзя изменить почту существующему пользователю");
+        }
+        return userRepository.update(userId, user);
     }
 
     public void removeUser(long userId) {
