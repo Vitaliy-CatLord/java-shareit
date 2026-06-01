@@ -26,14 +26,14 @@ public class ItemService {
             throw new ValidationException("У предмета должно быть название");
         }
         if (dto.getDescription().isEmpty() || dto.getDescription().isBlank()) {
-            throw new ValidationException("У предмета должно быть описание");
+            throw new ValidationException(String.format("У %s должно быть описание", dto.getName()));
         }
         if (dto.getAvailable() == null) {
-            throw new ValidationException("У предмета должна быть обозначена Доступность");
+            throw new ValidationException(String.format("У %s должна быть обозначена Доступность", dto.getName()));
         }
         User owner = userRepository.findById(userId);
         if (owner == null) {
-            throw new NotFoundException("Пользователя с ID " + userId + " не существует");
+            throw new NotFoundException(String.format("Пользователя с ID %s не существует", userId));
         }
         Item item = ItemMapper.toItem(dto);
         item.setOwner(owner);
