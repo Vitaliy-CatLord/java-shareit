@@ -1,4 +1,4 @@
-package ru.practicum.shareit.request;
+package ru.practicum.shareit.item;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -6,28 +6,27 @@ import lombok.Data;
 import lombok.experimental.FieldDefaults;
 import ru.practicum.shareit.user.User;
 
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.time.LocalDateTime;
 
-/**
- * TODO Sprint add-item-requests.
- */
 @Entity
-@Table(name = "request")
+@Table(name = "comments")
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ItemRequest {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
-    @Column(name = "description", nullable = false)
-    String description;
+    Long id;
+    @Column(name = "text")
+    String text;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "requestor_id")
-    User requestor;
+    @ManyToOne
+    @JoinColumn(name = "item_id")
+    Item item;
 
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    User author;
     @Column(name = "created")
     LocalDateTime created;
+
 }
