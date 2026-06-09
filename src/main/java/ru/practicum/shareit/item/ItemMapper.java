@@ -5,24 +5,26 @@ import ru.practicum.shareit.item.dto.ItemDtoOut;
 
 public class ItemMapper {
     public static ItemDto toItemDto(Item item) {
-        ItemDto itemDto = new ItemDto(
-                item.getName(),
-                item.getDescription(),
-                item.getAvailable(),
-                item.getRequest().getId());
-        return itemDto;
+
+        ItemDto dto = new ItemDto();
+        dto.setName(item.getName());
+        dto.setDescription(item.getDescription());
+        dto.setAvailable(item.getAvailable());
+        dto.setRequestId(item.getRequest().getId());
+        return dto;
     }
 
     public static ItemDtoOut toItemDtoOut(Item item) {
-        ItemDtoOut itemDtoOut = new ItemDtoOut(
-                item.getId(),
-                item.getName(),
-                item.getDescription(),
-                item.getAvailable());
+
+        ItemDtoOut out = new ItemDtoOut();
+        out.setId(item.getId());
+        out.setName(item.getName());
+        out.setDescription(item.getDescription());
+        out.setAvailable(item.getAvailable());
         if (item.getRequest() != null) {
-            itemDtoOut.setRequestId(item.getRequest().getId());
+            out.setRequestId(item.getRequest().getId());
         }
-        return itemDtoOut;
+        return out;
     }
 
     public static Item toItem(ItemDto dto) {

@@ -37,7 +37,7 @@ public class UserServiceImp implements UserService{
     @Override
     public UserDto update(Long id, UserDto dto) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> {return new NotFoundException("Пользователя с " + id + " не существует");});
+                .orElseThrow(() -> new NotFoundException("Пользователя с " + id + " не существует"));
         String name = dto.getName();
         if (name != null && !name.isBlank()) {
             user.setName(name);
@@ -57,9 +57,7 @@ public class UserServiceImp implements UserService{
     @Transactional
     public UserDto findById(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> {
-                            return new NotFoundException("Пользователя с " + id + " не существует");
-                        }
+                .orElseThrow(() -> new NotFoundException("Пользователя с " + id + " не существует")
                 );
         return UserMapper.toUserDto(user);    }
 
