@@ -12,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    Long id;
     @Column(name = "name", nullable = false)
     String name;
     @Column(name = "email", nullable = false, unique = true)

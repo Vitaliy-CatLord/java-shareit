@@ -7,6 +7,7 @@ import lombok.experimental.FieldDefaults;
 import ru.practicum.shareit.user.User;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  * TODO Sprint add-item-requests.
@@ -17,5 +18,5 @@ import java.sql.Timestamp;
 public class ItemRequestDto {
     String description;
     User requestor;
-    Timestamp created;
+    LocalDateTime created;
 }

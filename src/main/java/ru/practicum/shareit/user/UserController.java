@@ -16,35 +16,35 @@ import java.util.List;
 @RequestMapping(path = "/users")
 @RequiredArgsConstructor
 public class UserController {
-    private final UserService userService;
+    private final UserServiceImp userService;
 
     @PostMapping
-    public User postUser(@Valid @RequestBody UserDto newUser) {
+    public UserDto postUser(@Valid @RequestBody UserDto newUser) {
         log.info("Выполнение запроса на создание пользователя {}", newUser);
-        return userService.createUser(newUser);
+        return userService.create(newUser);
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<UserDto> getAllUsers() {
         log.info("Выполнение запроса на получение всех пользователей");
-        return userService.getAll();
+        return userService.findAll();
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
+    public UserDto getUserById(@PathVariable Long id) {
         log.info("Выполнение запроса на получение пользователя с ID {}", id);
-        return userService.getUserById(id);
+        return userService.findById(id);
     }
 
     @PatchMapping("/{id}")
-    public User putUser(@PathVariable Long id, @Valid @RequestBody UserDto updateUser) {
+    public UserDto putUser(@PathVariable Long id, @Valid @RequestBody UserDto updateUser) {
         log.info("Выполнение запроса на изменение пользователя {} с ID {}", updateUser, id);
-        return userService.updateUser(id, updateUser);
+        return userService.update(id, updateUser);
     }
 
     @DeleteMapping("/{id}")
     public void removeFriend(@PathVariable Long id) {
         log.info("Выполнение запроса на удаление пользователя c ID {}", id);
-        userService.removeUser(id);
+        userService.delete(id);
     }
 }

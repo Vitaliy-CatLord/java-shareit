@@ -26,9 +26,9 @@ public class Booking {
     @JoinColumn(name = "item_id", nullable = false)
     Item item;
     @ManyToOne
-    @JoinColumn(name = "item_id", nullable = false)
+    @JoinColumn(name = "booker_id", nullable = false)
     User booker;
     @Enumerated(EnumType.STRING)
-            @Column(name = "status")
+    @Column(name = "status")
     BookingStatus status;
 }

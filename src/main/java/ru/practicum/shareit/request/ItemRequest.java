@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  * TODO Sprint add-item-requests.
  */
 @Entity
-@Table(name = "request")
+@Table(name = "requests")
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ItemRequest {
