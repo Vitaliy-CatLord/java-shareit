@@ -1,4 +1,4 @@
-package ru.practicum.shareit.item;
+package ru.practicum.shareit.item.service;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -8,17 +8,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.Exceptions.NotFoundException;
 import ru.practicum.shareit.Exceptions.ValidationException;
-import ru.practicum.shareit.booking.Booking;
+import ru.practicum.shareit.booking.models.Booking;
 import ru.practicum.shareit.booking.BookingMapper;
-import ru.practicum.shareit.booking.BookingRepository;
-import ru.practicum.shareit.booking.BookingStatus;
+import ru.practicum.shareit.booking.repository.BookingRepository;
+import ru.practicum.shareit.booking.models.BookingStatus;
 import ru.practicum.shareit.booking.dto.BookingDtoOut;
+import ru.practicum.shareit.item.mappers.CommentMapper;
+import ru.practicum.shareit.item.repository.CommentRepository;
+import ru.practicum.shareit.item.mappers.ItemMapper;
+import ru.practicum.shareit.item.repository.ItemRepository;
 import ru.practicum.shareit.item.dto.CommentDto;
 import ru.practicum.shareit.item.dto.CommentDtoOut;
 import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.item.dto.ItemDtoOut;
-import ru.practicum.shareit.user.User;
-import ru.practicum.shareit.user.UserRepository;
+import ru.practicum.shareit.item.models.Comment;
+import ru.practicum.shareit.item.models.Item;
+import ru.practicum.shareit.user.models.User;
+import ru.practicum.shareit.user.repository.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -29,7 +35,7 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class ItemServiceImp implements ItemService{
+public class ItemServiceImp implements ItemService {
 
     CommentRepository commentRepository;
     BookingRepository bookingRepository;
@@ -108,7 +114,7 @@ public class ItemServiceImp implements ItemService{
         if (!item.getOwner().getId().equals(userId)) {
             return itemDtoOut;
         }
-        List<BookingDtoOut> bookingDTOList =  bookingRepository.findAllByItemAndStatusOrderByStartDateAsc(item, BookingStatus.APPROVED)
+        List<BookingDtoOut> bookingDTOList = bookingRepository.findAllByItemAndStatusOrderByStartDateAsc(item, BookingStatus.APPROVED)
                 .stream()
                 .map(BookingMapper::toBookingOut)
                 .toList();
@@ -185,7 +191,7 @@ public class ItemServiceImp implements ItemService{
         return bookings
                 .stream()
                 .filter(bookingDTO -> bookingDTO.getStart().isBefore(time))
-                .reduce((booking1, booking2) -> booking1.getStart().isAfter(booking2.getStart()) ? booking1 : booking2)
+                .reduce((booking1, booking2) -> booking2)
                 .orElse(null);
     }
 

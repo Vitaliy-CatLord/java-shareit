@@ -1,4 +1,4 @@
-package ru.practicum.shareit.booking;
+package ru.practicum.shareit.booking.service;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -10,12 +10,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.Exceptions.NotFoundException;
 import ru.practicum.shareit.Exceptions.ValidationException;
+import ru.practicum.shareit.booking.BookingMapper;
 import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.booking.dto.BookingDtoOut;
-import ru.practicum.shareit.item.Item;
-import ru.practicum.shareit.item.ItemRepository;
-import ru.practicum.shareit.user.User;
-import ru.practicum.shareit.user.UserRepository;
+import ru.practicum.shareit.booking.models.Booking;
+import ru.practicum.shareit.booking.models.BookingState;
+import ru.practicum.shareit.booking.models.BookingStatus;
+import ru.practicum.shareit.booking.repository.BookingRepository;
+import ru.practicum.shareit.item.models.Item;
+import ru.practicum.shareit.item.repository.ItemRepository;
+import ru.practicum.shareit.user.models.User;
+import ru.practicum.shareit.user.repository.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,7 +31,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class BookingServiceImp implements BookingService{
+public class BookingServiceImp implements BookingService {
     BookingRepository bookingRepository;
     UserRepository userRepository;
     ItemRepository itemRepository;
@@ -145,6 +150,7 @@ public class BookingServiceImp implements BookingService{
         }
         return userById.get();
     }
+
     Item itemIsExist(Long itemId) {
         Optional<Item> itemById = itemRepository.findById(itemId);
         if (itemById.isEmpty()) {
@@ -152,6 +158,7 @@ public class BookingServiceImp implements BookingService{
         }
         return itemById.get();
     }
+
     Booking bookingIsExist(Long bookingId) {
         Optional<Booking> bookingById = bookingRepository.findById(bookingId);
         if (bookingById.isEmpty()) {

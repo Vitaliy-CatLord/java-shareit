@@ -2,9 +2,11 @@ package ru.practicum.shareit.booking;
 
 import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.booking.dto.BookingDtoOut;
-import ru.practicum.shareit.item.Item;
-import ru.practicum.shareit.item.ItemMapper;
-import ru.practicum.shareit.user.User;
+import ru.practicum.shareit.booking.models.Booking;
+import ru.practicum.shareit.booking.models.BookingStatus;
+import ru.practicum.shareit.item.models.Item;
+import ru.practicum.shareit.item.mappers.ItemMapper;
+import ru.practicum.shareit.user.models.User;
 import ru.practicum.shareit.user.UserMapper;
 
 public class BookingMapper {

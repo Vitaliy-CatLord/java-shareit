@@ -9,6 +9,7 @@ import ru.practicum.shareit.item.dto.CommentDto;
 import ru.practicum.shareit.item.dto.CommentDtoOut;
 import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.item.dto.ItemDtoOut;
+import ru.practicum.shareit.item.service.ItemServiceImp;
 
 import java.util.List;
 
@@ -28,8 +29,8 @@ public class ItemController {
 
     @PatchMapping("/{itemId}")
     public ItemDtoOut putItem(@RequestHeader(USER_HEADER) Long userId,
-                           @PathVariable Long itemId,
-                           @Valid @RequestBody ItemDto updateItem) {
+                              @PathVariable Long itemId,
+                              @Valid @RequestBody ItemDto updateItem) {
         log.info("Выполнение запроса на изменение вещи с ID {} юзером с ID {}", itemId, userId);
         return itemService.updateItem(userId, itemId, updateItem);
     }

@@ -1,6 +1,7 @@
-package ru.practicum.shareit.request;
+package ru.practicum.shareit.request.repository;
 
 import org.springframework.stereotype.Repository;
+import ru.practicum.shareit.request.models.ItemRequest;
 
 import java.util.HashMap;
 import java.util.List;

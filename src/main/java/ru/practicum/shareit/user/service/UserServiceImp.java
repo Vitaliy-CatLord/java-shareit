@@ -1,4 +1,4 @@
-package ru.practicum.shareit.user;
+package ru.practicum.shareit.user.service;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.Exceptions.ConflictException;
 import ru.practicum.shareit.Exceptions.NotFoundException;
 import ru.practicum.shareit.Exceptions.ValidationException;
+import ru.practicum.shareit.user.models.User;
+import ru.practicum.shareit.user.UserMapper;
+import ru.practicum.shareit.user.repository.UserRepository;
 import ru.practicum.shareit.user.dto.UserDto;
 
 import java.util.List;
@@ -18,7 +21,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class UserServiceImp implements UserService{
+public class UserServiceImp implements UserService {
     UserRepository userRepository;
 
     @Override
@@ -59,7 +62,8 @@ public class UserServiceImp implements UserService{
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Пользователя с " + id + " не существует")
                 );
-        return UserMapper.toUserDto(user);    }
+        return UserMapper.toUserDto(user);
+    }
 
     @Override
     public void delete(Long id) {

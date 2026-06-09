@@ -1,4 +1,4 @@
-package ru.practicum.shareit.user;
+package ru.practicum.shareit.user.models;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

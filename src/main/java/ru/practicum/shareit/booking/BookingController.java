@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.booking.dto.BookingDtoOut;
+import ru.practicum.shareit.booking.service.BookingService;
 
 import java.util.List;
 
@@ -43,18 +44,18 @@ public class BookingController {
 
     @GetMapping
     public List<BookingDtoOut> findBookingByState(@RequestHeader(USER_HEADER) Long userId,
-                                       @RequestParam(value = "state", defaultValue = "ALL") String bookingState,
-                                       @RequestParam(value = "from", defaultValue = "0") Integer from,
-                                       @RequestParam(value = "size", defaultValue = "10") Integer size) {
+                                                  @RequestParam(value = "state", defaultValue = "ALL") String bookingState,
+                                                  @RequestParam(value = "from", defaultValue = "0") Integer from,
+                                                  @RequestParam(value = "size", defaultValue = "10") Integer size) {
         log.info("GET запрос на получение списка всех бронирований текущего пользователя с id: {} и статусом {}", userId, bookingState);
         return bookingService.findAllByState(userId, bookingState, from, size);
     }
 
     @GetMapping("/owner")
     public List<BookingDtoOut> getAllOwnerBooking(@RequestHeader(USER_HEADER) Long ownerId,
-                                           @RequestParam(value = "state", defaultValue = "ALL") String bookingState,
-                                           @RequestParam(value = "from", defaultValue = "0") Integer from,
-                                           @RequestParam(value = "size", defaultValue = "10") Integer size) {
+                                                  @RequestParam(value = "state", defaultValue = "ALL") String bookingState,
+                                                  @RequestParam(value = "from", defaultValue = "0") Integer from,
+                                                  @RequestParam(value = "size", defaultValue = "10") Integer size) {
         log.info("GET запрос на получение списка всех бронирований текущего владельца с id: {} и статусом {}", ownerId, bookingState);
         return bookingService.findAllOwnersBooking(ownerId, bookingState, from, size);
     }
