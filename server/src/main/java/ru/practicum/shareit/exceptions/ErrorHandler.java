@@ -34,12 +34,6 @@ public class ErrorHandler {
 
     @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler
-    public ErrorResponse handleDuplicatedDataException(final DuplicatedDataException e) {
-        return new ErrorResponse(e.getMessage());
-    }
-
-    @ResponseStatus(HttpStatus.CONFLICT)
-    @ExceptionHandler
     public ErrorResponse handleConflictException(final ConflictException e) {
         return new ErrorResponse(e.getMessage());
     }
