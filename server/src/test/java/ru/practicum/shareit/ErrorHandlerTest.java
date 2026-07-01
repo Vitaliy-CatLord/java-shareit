@@ -12,12 +12,10 @@ import ru.practicum.shareit.user.dto.UserDto;
 import ru.practicum.shareit.user.models.User;
 import ru.practicum.shareit.user.repository.UserRepository;
 
-
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -38,7 +36,7 @@ class ErrorHandlerTest {
 
     @Test
     void handleValidationException_return400() throws Exception {
-        UserDto dto = new UserDto(null, "   " , "old@ex.ru");
+        UserDto dto = new UserDto(null, "   ", "old@ex.ru");
 
         mockMvc.perform(post("/users")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -48,7 +46,7 @@ class ErrorHandlerTest {
 
     @Test
     void handleConflictException_return409() throws Exception {
-        UserDto dto = new UserDto(null, "Name" , "new@ex.ru");
+        UserDto dto = new UserDto(null, "Name", "new@ex.ru");
         User old = new User();
         old.setId(1L);
         old.setName("Old");
