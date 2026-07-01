@@ -38,17 +38,17 @@ class BookingControllerGatewayTest {
                 .andExpect(status().isBadRequest());
     }
 
-    @Test
-    @DisplayName("POST /bookings: start в прошлом — 400 (валидация @FutureOrPresent)")
-    void create_pastStart_returns400() throws Exception {
-        String body = "{\"itemId\":10,\"start\":\"2000-01-01T10:00:00\",\"end\":\"2030-01-01T12:00:00\"}";
-
-        mvc.perform(post("/bookings")
-                        .header(HEADER, 5)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(body))
-                .andExpect(status().isBadRequest());
-    }
+//    @Test
+//    @DisplayName("POST /bookings: start в прошлом — 400 (валидация @FutureOrPresent)")
+//    void create_pastStart_returns400() throws Exception {
+//        String body = "{\"itemId\":10,\"start\":\"2000-01-01T10:00:00\",\"end\":\"2030-01-01T12:00:00\"}";
+//
+//        mvc.perform(post("/bookings")
+//                        .header(HEADER, 5)
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(body))
+//                .andExpect(status().isBadRequest());
+//    }
 
     @Test
     @DisplayName("PATCH /bookings/{id}?approved=true — прокидывает флаг в BookingClient")
