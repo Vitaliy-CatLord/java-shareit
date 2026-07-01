@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(Long id) {
-        if(!userRepository.existsById(id)) {
+        if (!userRepository.existsById(id)) {
             throw new NotFoundException("Пользователь для удаления не найден");
         }
         userRepository.deleteById(id);
@@ -95,8 +95,8 @@ public class UserServiceImpl implements UserService {
 
     private void validateEmailUnique(String email, Long selfId) {
         User old = userRepository.findUserByEmail(email);
-            if (old != null && !Objects.equals(old.getId(), selfId)) {
-                throw new ConflictException("Почта " + email + " занята");
-            }
+        if (old != null && !Objects.equals(old.getId(), selfId)) {
+            throw new ConflictException("Почта " + email + " занята");
+        }
     }
 }

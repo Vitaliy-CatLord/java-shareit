@@ -27,10 +27,14 @@ import static org.junit.jupiter.api.Assertions.*;
 @Transactional
 class ItemRequestServiceImplTest {
 
-    @Autowired private ItemRequestService requestService;
-    @Autowired private ItemRequestRepository requestRepo;
-    @Autowired private UserRepository userRepo;
-    @Autowired private ItemRepository itemRepo;
+    @Autowired
+    private ItemRequestService requestService;
+    @Autowired
+    private ItemRequestRepository requestRepo;
+    @Autowired
+    private UserRepository userRepo;
+    @Autowired
+    private ItemRepository itemRepo;
 
     @Test
     void create_and_getById_returnsDtoWithCreatedAndEmptyItems() {

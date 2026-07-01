@@ -209,7 +209,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     @Transactional
     public CommentDto createComment(Long userId, CommentCreateDto commentDto, Long itemId) {
-                if (commentDto == null || commentDto.getText() == null || commentDto.getText().isBlank()) {
+        if (commentDto == null || commentDto.getText() == null || commentDto.getText().isBlank()) {
             throw new ValidationException("Текст комментария не может быть пустым");
         }
 
