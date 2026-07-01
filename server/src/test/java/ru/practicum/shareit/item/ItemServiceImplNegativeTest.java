@@ -167,7 +167,7 @@ class ItemServiceImplNegativeTest {
 
     @Test
     void addComment_itemNotFound_throwsNFE() {
-        User u =user(1L);
+        User u = user(1L);
         when(users.findById(1L)).thenReturn(Optional.of(u));
         when(items.findById(2L)).thenReturn(Optional.empty());
         assertThrows(NotFoundException.class,

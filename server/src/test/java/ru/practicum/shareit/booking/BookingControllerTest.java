@@ -28,7 +28,8 @@ class BookingControllerTest {
 
     private static final String HEADER = "X-Sharer-User-Id";
 
-    @Autowired MockMvc mvc;
+    @Autowired
+    MockMvc mvc;
 
     @MockBean
     BookingService bookings;

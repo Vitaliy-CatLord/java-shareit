@@ -1,7 +1,6 @@
 package ru.practicum.shareit.user.dto;
 
 import org.junit.jupiter.api.Test;
-import ru.practicum.shareit.user.dto.UserDto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

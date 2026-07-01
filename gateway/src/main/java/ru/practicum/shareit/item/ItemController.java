@@ -26,14 +26,14 @@ public class ItemController {
     @PostMapping
     public ResponseEntity<Object> create(@RequestHeader(USER_HEADER) long userId,
                                          @Valid @RequestBody ItemCreateDto dto) {
-        log.info("create item with userId={}, item={}",  userId, dto);
+        log.info("create item with userId={}, item={}", userId, dto);
         return itemClient.create(userId, dto);
     }
 
     @GetMapping("/{itemId}")
     public ResponseEntity<Object> getById(@RequestHeader(USER_HEADER) long userId,
                                           @PathVariable long itemId) {
-        log.info("get item with userId={}, itemId={}",  userId, itemId);
+        log.info("get item with userId={}, itemId={}", userId, itemId);
         return itemClient.getById(userId, itemId);
     }
 
@@ -41,7 +41,7 @@ public class ItemController {
     public ResponseEntity<Object> getOwnerItems(@RequestHeader(USER_HEADER) long userId,
                                                 @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
                                                 @Positive @RequestParam(defaultValue = "10") Integer size) {
-        log.info("get owner items with userId={}, from={}, size={}",  userId, from, size);
+        log.info("get owner items with userId={}, from={}, size={}", userId, from, size);
         return itemClient.getOwnerItems(userId, from, size);
     }
 
@@ -50,7 +50,7 @@ public class ItemController {
                                          @RequestParam String text,
                                          @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
                                          @Positive @RequestParam(defaultValue = "10") Integer size) {
-        log.info("search items with userId={}, text={} from={}, size={}",  userId, text, from, size);
+        log.info("search items with userId={}, text={} from={}, size={}", userId, text, from, size);
         return itemClient.search(userId, text, from, size);
     }
 
@@ -58,7 +58,7 @@ public class ItemController {
     public ResponseEntity<Object> addComment(@RequestHeader(USER_HEADER) long userId,
                                              @PathVariable long itemId,
                                              @Valid @RequestBody CommentCreateDto dto) {
-        log.info("add item comment with userId={}, itemId={}, comment={}",  userId, itemId, dto);
+        log.info("add item comment with userId={}, itemId={}, comment={}", userId, itemId, dto);
         return itemClient.addComment(userId, itemId, dto);
     }
 

@@ -179,14 +179,14 @@ public class BookingServiceImp implements BookingService {
     }
 
     void validateBookingCreateDto(BookingCreateDto createDto) {
-        if(createDto == null) {
+        if (createDto == null) {
             throw new ValidationException("Заявка брони нулевая");
         }
-        if(createDto.getItemId() == null) {
+        if (createDto.getItemId() == null) {
             throw new ValidationException("Идентификатор вещи в заявке нулевой");
         }
 
-        if(createDto.getStart().isAfter(createDto.getEnd())) {
+        if (createDto.getStart().isAfter(createDto.getEnd())) {
             throw new ValidationException("Старт заявки указан после ее завершения");
         }
     }

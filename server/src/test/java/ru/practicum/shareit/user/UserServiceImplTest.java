@@ -60,10 +60,9 @@ class UserServiceImplTest {
     }
 
 
-
     @Test
     void create_duplicateEmail_throwsConflict() {
-        when(repo.findUserByEmail("a@ex.com")).thenReturn(user(6L,"J", "a@ex.com"));
+        when(repo.findUserByEmail("a@ex.com")).thenReturn(user(6L, "J", "a@ex.com"));
 
         assertThrows(ConflictException.class,
                 () -> service.create(UserDto.builder().name("Ann").email("a@ex.com").build()));
@@ -72,7 +71,7 @@ class UserServiceImplTest {
     @Test
     void update_changesOnlyProvidedFields_andChecksUniqueEmail() {
         when(repo.findById(1L)).thenReturn(Optional.of(user(1L, "Old", "old@ex.com")));
-        when(repo.findUserByEmail("new@ex.com")).thenReturn(user(6L,"J", "new@ex.com"));
+        when(repo.findUserByEmail("new@ex.com")).thenReturn(user(6L, "J", "new@ex.com"));
 
         // email занят другим — Conflict
         assertThrows(ConflictException.class,
@@ -80,7 +79,7 @@ class UserServiceImplTest {
 
         // а вот изменение имени без email — ок
         when(repo.findById(1L)).thenReturn(Optional.of(user(1L, "Old", "old@ex.com")));
-        when(repo.save(any(User.class))).thenReturn(user(1L,"New", "old@ex.com"));
+        when(repo.save(any(User.class))).thenReturn(user(1L, "New", "old@ex.com"));
         UserDto out = service.update(1L, UserDto.builder().name("New").build());
         assertEquals("New", out.getName());
         assertEquals("old@ex.com", out.getEmail());

@@ -1,8 +1,6 @@
 package ru.practicum.shareit.request.dto;
 
 import org.junit.jupiter.api.Test;
-import ru.practicum.shareit.request.dto.ItemRequestCreateDto;
-import ru.practicum.shareit.request.dto.ItemRequestDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
