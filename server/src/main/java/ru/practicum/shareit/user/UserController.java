@@ -14,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private static final String USER_ID = "/{id}";
 
     @PostMapping
     public UserDto createUser(@RequestBody UserDto newUser) {
@@ -27,19 +28,19 @@ public class UserController {
         return userService.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(USER_ID)
     public UserDto getUserById(@PathVariable Long id) {
         log.info("Выполнение запроса на получение пользователя с ID {}", id);
         return userService.findById(id);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping(USER_ID)
     public UserDto putUser(@PathVariable Long id, @RequestBody UserDto updateUser) {
         log.info("Выполнение запроса на изменение пользователя {} с ID {}", updateUser, id);
         return userService.update(id, updateUser);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(USER_ID)
     public void removeFriend(@PathVariable Long id) {
         log.info("Выполнение запроса на удаление пользователя c ID {}", id);
         userService.delete(id);

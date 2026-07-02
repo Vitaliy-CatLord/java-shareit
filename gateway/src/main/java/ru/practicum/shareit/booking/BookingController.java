@@ -22,6 +22,7 @@ public class BookingController {
     private final BookingClient bookingClient;
 
     private static final String USER_HEADER = "X-Sharer-User-Id";
+    private static final String BOOKING_ID = "/{bookingId}";
 
     @GetMapping
     public ResponseEntity<Object> getBookings(
@@ -54,14 +55,14 @@ public class BookingController {
         return bookingClient.bookItem(userId, requestDto);
     }
 
-    @GetMapping("/{bookingId}")
+    @GetMapping(BOOKING_ID)
     public ResponseEntity<Object> getBooking(@RequestHeader(USER_HEADER) long userId,
                                              @PathVariable Long bookingId) {
         log.info("Get booking {}, userId={}", bookingId, userId);
         return bookingClient.getBooking(userId, bookingId);
     }
 
-    @PatchMapping("/{bookingId}")
+    @PatchMapping(BOOKING_ID)
     public ResponseEntity<Object> approve(@RequestHeader(USER_HEADER) long userId,
                                           @PathVariable long bookingId,
                                           @RequestParam boolean approved) {

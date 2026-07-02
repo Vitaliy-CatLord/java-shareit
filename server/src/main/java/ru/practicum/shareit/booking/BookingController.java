@@ -17,6 +17,7 @@ import java.util.List;
 public class BookingController {
     private final BookingService bookingService;
     private static final String USER_HEADER = "X-Sharer-User-Id";
+    private static final String BOOKING_ID = "/{bookingId}";
 
     @PostMapping
     public BookingDto create(@RequestHeader(USER_HEADER) Long userId,
@@ -25,7 +26,7 @@ public class BookingController {
         return bookingService.createBooking(userId, bookingDto);
     }
 
-    @PatchMapping("/{bookingId}")
+    @PatchMapping(BOOKING_ID)
     public BookingDto updateStatus(@RequestHeader(USER_HEADER) Long userId,
                                    @PathVariable("bookingId")
                                    Long bookingId,
@@ -35,7 +36,7 @@ public class BookingController {
         return bookingService.aproveBooking(userId, bookingId, approved);
     }
 
-    @GetMapping("/{bookingId}")
+    @GetMapping(BOOKING_ID)
     public BookingDto findBookingById(@RequestHeader(USER_HEADER) Long userId,
                                       @PathVariable("bookingId")
                                       Long bookingId) {
